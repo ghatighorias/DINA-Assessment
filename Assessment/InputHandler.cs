@@ -25,9 +25,9 @@ namespace Assessment
             galecticHandler = new GalecticRomanAssignmentValueHandler();
             mixedHandler = new MixedAssignmentHandler(galecticHandler);
 
-            questionPattern = "^(how much|how many Credits) is [a-zA-Z\\s]+ \\?$";
-            galecticalAssignmentPatterm = "^\\w+ is (I|V|X|L|C|D|M)$";
-            mixedAssignmentPattern = "^([a-zA-z]+\\s)+is \\d+ Credits$";
+            questionPattern = "^(how much|how many Credits) is ([a-zA-Z\\s]+) \\?$";
+            galecticalAssignmentPatterm = "^(\\w+) is (I|V|X|L|C|D|M)$";
+            mixedAssignmentPattern = "^(([A-za-z]+\\s)+is) (\\d+) Credits$";
 
             questionRgx = new Regex(questionPattern, RegexOptions.IgnoreCase);
             mixedAssignmentRgx = new Regex(mixedAssignmentPattern, RegexOptions.IgnoreCase);
@@ -37,14 +37,15 @@ namespace Assessment
         public string ParseInput(String InputLine)
         {
             string result="";
+            GroupCollection inputGroups;
 
             if (IsGalecticalAssignment(InputLine))
             {
-                if (!galecticHandler.ParsedAssignment(InputLine.Split(new string[] { " is " }, StringSplitOptions.RemoveEmptyEntries)))
+                inputGroups = galecticalAssignmentRgx.Matches(InputLine)[0].Groups;
+                if (!galecticHandler.ParsedAssignment(inputGroups[1].Value, inputGroups[2].Value))
                 {
                     result = "Error";
                 }
-
             }
             else if (IsQuestion(InputLine))
             {
@@ -52,11 +53,18 @@ namespace Assessment
             }
             else if (IsMixedAssignment(InputLine))
             {
-                string[] fixedstring = InputLine.Replace(" Credits", "").Replace(" is", "").Split(new string[] { " " }, StringSplitOptions.RemoveEmptyEntries);
-                if (!mixedHandler.ParsedAssignment(fixedstring))
+                inputGroups = mixedAssignmentRgx.Matches(InputLine)[0].Groups;
+                string[] RomanAndVariablesInsentence = mixedAssignmentRgx.Match(InputLine).Groups[1].Value.Replace("is", "").Split(new string[] { " " }, StringSplitOptions.RemoveEmptyEntries);
+                string digitValueOfaterial = mixedAssignmentRgx.Match(InputLine).Groups[3].Value;
+                List<string> elementsToProcess = new List<string>();
+                elementsToProcess.AddRange(RomanAndVariablesInsentence);
+                elementsToProcess.Add(digitValueOfaterial);
+
+                if (!mixedHandler.ParsedAssignment(elementsToProcess.ToArray()))
                 {
                     result = "Error";
                 }
+                
             }
             else
                 return "Error";
@@ -67,27 +75,51 @@ namespace Assessment
 
         private string ProvideAnswer(String input)
         {
-            
-            string[] bareQuestionParts = input.Replace(" ?", "").Replace("how many Credits is ", "").Split(new string[] { " " },StringSplitOptions.RemoveEmptyEntries);
-            RomanNumerals queriedGalecticalValue;
-            string reconstructedRomanString = "";
-            float queriedMaterialValue;
-            foreach (var item in bareQuestionParts)
+            ParsingPhase currentPhase = ParsingPhase.GALECTICALTERM;
+            ParsingPhase previousphase = ParsingPhase.NONE;
+            int variableCounter = 0;
+            RomanNumerals queriedGalecticalTermValue;
+            float queriedMixedTermValue = 1;
+            bool queryResult;
+            string constructedRomanNumeralSet="";
+         
+            foreach (var item in input.Split(new string[] {" "},StringSplitOptions.RemoveEmptyEntries))
             {
-                queriedGalecticalValue = galecticHandler.QueryAssignedValue(item);
-                if (RomanNumerals.INVALID != queriedGalecticalValue)
-                {
-                    reconstructedRomanString += " ";
-                    continue;
-                }
+                queriedGalecticalTermValue = galecticHandler.QueryAssignedValue(item);
+                queryResult = mixedHandler.QueryAssignedValue(item, out queriedMixedTermValue);
 
-                if (!mixedHandler.QueryAssignedValue(item, out queriedMaterialValue))
-                    return "Error";
+                if (RomanNumerals.INVALID != queriedGalecticalTermValue)
+                    currentPhase = ParsingPhase.GALECTICALTERM;
+                else if (queryResult)
+                {
+                    currentPhase = ParsingPhase.VARIABLES;
+                    variableCounter++;
+                }
+                else
+                    currentPhase = ParsingPhase.NONE;
+
+                if ((int)currentPhase >= (int)previousphase && 1 >= variableCounter)
+                {
+                    switch (currentPhase)
+                    {
+                        case ParsingPhase.GALECTICALTERM:
+                            constructedRomanNumeralSet += queriedGalecticalTermValue.ToString() + " ";
+                            break;
+                    }
+                }
+                else
+                    throw new Exception("The order of variable in question is not valid");
+
+                previousphase = currentPhase;
             }
 
-            RomanNumeralParser parser = new RomanNumeralParser(reconstructedRomanString);
+            RomanNumeralParser parser = new RomanNumeralParser();
+            float calculatedResult = parser.CalculateRomanNumeralSet(constructedRomanNumeralSet.Split(new string[] { " " }, StringSplitOptions.RemoveEmptyEntries));
 
-            return parser.ToString();
+            if (variableCounter>0)
+                calculatedResult *= queriedMixedTermValue;
+
+            return calculatedResult.ToString();
         }
 
         public bool IsQuestion(String input)
