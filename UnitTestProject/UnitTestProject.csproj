@@ -54,7 +54,8 @@
   <ItemGroup>
     <Compile Include="RomanNumeralParsetTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="UnitTest1.cs" />
+    <Compile Include="GalecticRomanAssignmentValueHandlerTests.cs" />
+    <Compile Include="MixedAssignmentHandlerTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Assessment\Assessment.csproj">

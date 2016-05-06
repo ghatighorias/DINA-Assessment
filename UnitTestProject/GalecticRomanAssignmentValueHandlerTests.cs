@@ -5,7 +5,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace UnitTestProject
 {
     [TestClass]
-    public class GalecticRomanAssignmentValueHandlerUnitTest
+    public class GalecticRomanAssignmentValueHandlerTests
     {
         GalecticRomanAssignmentValueHandler grAssignment = new GalecticRomanAssignmentValueHandler();
 
