@@ -21,7 +21,7 @@ namespace Assessment
         {
             string result="";
 
-            if (isGalecticalAssignment(InputLine))
+            if (IsGalecticalAssignment(InputLine))
             {
                 if (!galecticHandler.ParsedAssignment(InputLine.Split(new string[] { " is " }, StringSplitOptions.RemoveEmptyEntries)))
                 {
@@ -29,11 +29,11 @@ namespace Assessment
                 }
 
             }
-            else if (isQuestion(InputLine))
+            else if (IsQuestion(InputLine))
             {
                 result = ProvideAnswer(InputLine);
             }
-            else if (isMixedAssignment(InputLine))
+            else if (IsMixedAssignment(InputLine))
             {
                 string[] fixedstring = InputLine.Replace(" Credits", "").Replace(" is", "").Split(new string[] { " " }, StringSplitOptions.RemoveEmptyEntries);
                 if (!mixedHandler.ParsedAssignment(fixedstring))
@@ -73,16 +73,16 @@ namespace Assessment
             return parser.ToString();
         }
 
-        private bool isQuestion(String input)
+        public bool IsQuestion(String input)
         {
             return input.StartsWith("how many Credits is", StringComparison.CurrentCultureIgnoreCase);
         }
-        private bool isMixedAssignment(String input)
+        public bool IsMixedAssignment(String input)
         {
             string[] fixedstring = input.Replace(" Credits", "").Replace(" is", "").Split(new string[] { " " }, StringSplitOptions.RemoveEmptyEntries);
             return mixedHandler.TryParsed(fixedstring);//fixedstring.Split(new string[] { " " }, StringSplitOptions.RemoveEmptyEntries));
         }
-        private bool isGalecticalAssignment(String input)
+        public bool IsGalecticalAssignment(String input)
         {
             RomanNumeralParser parser = new RomanNumeralParser();
             string[] elements = input.Split(new string[] { " is " }, StringSplitOptions.RemoveEmptyEntries);
