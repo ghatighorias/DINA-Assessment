@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace Assessment
 {
-  
 
-    enum RomanNumerals
+
+    public enum RomanNumerals
     {
         INVALID = 0,
         I = 1,
@@ -20,7 +20,7 @@ namespace Assessment
         M = 1000
     }
 
-    enum InputType
+    public enum InputType
     {
         INVALID,
         ASSIGNMENT,
@@ -28,7 +28,7 @@ namespace Assessment
         QUESTION
     }
 
-    enum ParsingPhase
+    public enum ParsingPhase
     {
         NONE,
         GALECTICALTERM,

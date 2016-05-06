@@ -38,13 +38,14 @@ namespace Assessment
                 else
                 {
                     if (parsedRomanNumerals[firstIndex] >= parsedRomanNumerals[secondIndex])
-                        sum += AddNumerals(parsedRomanNumerals[firstIndex], parsedRomanNumerals[secondIndex]);
+                        sum += AddNumerals(parsedRomanNumerals[firstIndex], RomanNumerals.INVALID);
                     else
                     {
                         sum += SubtractNumerals(parsedRomanNumerals[secondIndex], parsedRomanNumerals[firstIndex]);
                         firstIndex++;
                         secondIndex++;
                     }
+                        
                 }
 
                 firstIndex++;

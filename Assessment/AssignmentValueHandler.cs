@@ -6,16 +6,16 @@ using System.Threading.Tasks;
 
 namespace Assessment
 {
-    abstract class AssignmentValueHandler
+    public abstract class AssignmentValueHandler
     {
         public RomanNumeralParser parser;
         public abstract bool ParsedAssignment(params string[] AssignmentInputs);
         
     }
 
-    class GalecticRomanAssignmentValueHandler : AssignmentValueHandler
+    public class GalecticRomanAssignmentValueHandler : AssignmentValueHandler
     {
-        protected Dictionary<string, RomanNumerals> assignmentDictionary;
+        private Dictionary<string, RomanNumerals> assignmentDictionary;
         public GalecticRomanAssignmentValueHandler()
         {
             assignmentDictionary = new Dictionary<string, RomanNumerals>();
@@ -44,7 +44,7 @@ namespace Assessment
     }
 
 
-    class MixedAssignmentHandler : AssignmentValueHandler
+    public class MixedAssignmentHandler : AssignmentValueHandler
     {
         protected Dictionary<string, float> assignmentDictionary;
         GalecticRomanAssignmentValueHandler galecticRomanAssignmentValueHandler;

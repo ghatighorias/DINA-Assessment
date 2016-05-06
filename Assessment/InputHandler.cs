@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Assessment
 {
-    class InputHandler
+    public class InputHandler
     {
         GalecticRomanAssignmentValueHandler galecticHandler;
         MixedAssignmentHandler mixedHandler;
