@@ -67,10 +67,10 @@ namespace Assessment
                 else if (IsQuestion(InputLine))
                 {
                     inputGroups = questionRgx.Matches(InputLine)[0].Groups;
-                    outputResult = ProvideAnswer(inputGroups[2].Value);
+                    outputResult = inputGroups[2].Value + " is " + ProvideAnswer(inputGroups[2].Value);
                 }
                 else
-                    throw new ArgumentException();
+                    throw new ArgumentException("Can not understand the sentence");
             }
             catch(Exception e)
             {

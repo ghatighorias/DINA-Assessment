@@ -4,59 +4,65 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace UnitTestProject
 {
-    
+    //Making regex functions for checking the sentences private and fixing the tests accordingly
     [TestClass]
     public class InputHandlerTests
     {
         InputHandler inputHandler;
+        const string InvalidQuestion = "";
+        string output;
 
         [TestInitialize]
         public void Initialize()
         {
             inputHandler = new InputHandler();
+            
+            inputHandler.ParseInput("glob is I", out output);
+            inputHandler.ParseInput("prok is V", out output);
+            inputHandler.ParseInput("pish is X", out output);
+            inputHandler.ParseInput("tegj is L", out output);
+            inputHandler.ParseInput("glob glob Silver is 34 Credits", out output);
+            inputHandler.ParseInput("glob prok Gold is 57800 Credits", out output);
+            inputHandler.ParseInput("pish pish Iron is 3910 Credits", out output);
         }
 
         [TestMethod]
+        [ExpectedException(typeof(ArgumentException), "Can not understand the sentence")]
         public void TestMethod1()
         {
-            Assert.AreEqual(inputHandler.par("how much wood could a woodchuck chuck if a woodchuck could chuck wood ?"), false);
-            Assert.AreEqual(inputHandler.IsMixedAssignment("how much wood could a woodchuck chuck if a woodchuck could chuck wood ?"), false);
-            Assert.AreEqual(inputHandler.IsQuestion("how much wood could a woodchuck chuck if a woodchuck could chuck wood ?"), false);
+            inputHandler.ParseInput("how much wood could a woodchuck chuck if a woodchuck could chuck wood ?",out output);
         }
         [TestMethod]
+        [ExpectedException(typeof(ArgumentException), "Can not understand the sentence")]
         public void TestMethod2()
         {
-            Assert.AreEqual(inputHandler.IsGalecticalAssignment(""), false);
-            Assert.AreEqual(inputHandler.IsMixedAssignment(""), false);
-            Assert.AreEqual(inputHandler.IsQuestion(""), false);
+            inputHandler.ParseInput("", out output);
         }
         [TestMethod]
         public void TestMethod3()
         {
-            Assert.AreEqual(inputHandler.IsGalecticalAssignment("how many Credits is glob prok Silver ?"), false);
-            Assert.AreEqual(inputHandler.IsMixedAssignment("how many Credits is glob prok Silver ?"), false);
-            Assert.AreEqual(inputHandler.IsQuestion("how many Credits is glob prok Silver ?"), true);
+            inputHandler.ParseInput("how many Credits is glob prok Silver ?", out output);
+            Assert.AreEqual(output, "glob prok Silver is 68");
         }
         [TestMethod]
+        [ExpectedException(typeof(ArgumentException), "An item with the same key has already been added.")]
         public void TestMethod4()
         {
-            Assert.AreEqual(inputHandler.IsGalecticalAssignment("glob is I"), true);
-            Assert.AreEqual(inputHandler.IsMixedAssignment("glob is I"), false);
-            Assert.AreEqual(inputHandler.IsQuestion("glob is I"), false);
+            inputHandler.ParseInput("glob is I", out output);
+            Assert.AreEqual(output,string.Empty);
         }
         [TestMethod]
+        [ExpectedException(typeof(ArgumentException), "An item with the same key has already been added.")]
         public void TestMethod5()
         {
-            Assert.AreEqual(inputHandler.IsGalecticalAssignment("glob glob Silver is 34 Credits"), false);
-            Assert.AreEqual(inputHandler.IsMixedAssignment("glob glob Silver is 34 Credits"), true);
-            Assert.AreEqual(inputHandler.IsQuestion("glob glob Silver is 34 Credits"), false);
+            inputHandler.ParseInput("glob glob Silver is 34 Credits", out output);
+            Assert.AreEqual(output, string.Empty);
         }
         [TestMethod]
+        [ExpectedException(typeof(ArgumentException))]
         public void TestMethod6()
         {
-            Assert.AreEqual(inputHandler.IsGalecticalAssignment("how much is pish tegj glob glob"), false);
-            Assert.AreEqual(inputHandler.IsMixedAssignment("how much is pish tegj glob glob"), false);
-            Assert.AreEqual(inputHandler.IsQuestion("how much is pish tegj glob glob"), false);
+            inputHandler.ParseInput("how much is pish tegj glob glob", out output);
         }
     }
 }
