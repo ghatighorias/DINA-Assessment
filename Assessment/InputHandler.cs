@@ -48,7 +48,7 @@ namespace Assessment
                 else if (IsMixedAssignment(InputLine))
                 {
                     inputGroups = mixedAssignmentRgx.Matches(InputLine)[0].Groups;
-                    string[] RomanAndVariablesInsentence = mixedAssignmentRgx.Match(InputLine).Groups[1].Value.Replace(" is", "").Split(new string[] { " " }, StringSplitOptions.RemoveEmptyEntries);
+                    string[] RomanAndVariablesInsentence = Utility.SplitString(mixedAssignmentRgx.Match(InputLine).Groups[1].Value.Replace(" is", ""), " ", StringSplitOptions.RemoveEmptyEntries);
                     string digitValueOfaterial = mixedAssignmentRgx.Match(InputLine).Groups[3].Value;
                     List<string> elementsToProcess = new List<string>();
                     elementsToProcess.AddRange(RomanAndVariablesInsentence);
@@ -84,7 +84,7 @@ namespace Assessment
 
             try
             {
-                foreach (var item in input.Split(new string[] { " " }, StringSplitOptions.RemoveEmptyEntries))
+                foreach (var item in Utility.SplitString(input, " ", StringSplitOptions.RemoveEmptyEntries))
                 {
                     queriedGalecticalTermValue = galecticHandler.QueryAssignedValue(item);
                     queryResult = mixedHandler.Contains(item);
@@ -117,7 +117,7 @@ namespace Assessment
                 }
 
                 
-                calculatedResult = parser.CalculateRomanNumeralSet(constructedRomanNumeralSet.Split(new string[] { " " }, StringSplitOptions.RemoveEmptyEntries));
+                calculatedResult = parser.CalculateRomanNumeralSet(Utility.SplitString(constructedRomanNumeralSet, " ", StringSplitOptions.RemoveEmptyEntries));
 
                 if (variableCounter > 0)
                     calculatedResult *= queriedMixedTermValue;

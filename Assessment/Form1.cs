@@ -20,8 +20,9 @@ namespace Assessment
         private void button1_Click(object sender, EventArgs e)
         {
             InputHandler inputHandler = new InputHandler();
-            string outputResult = "";
-            foreach (var item in InputRichTextBox.Text.Split(new string[] { "\n" }, StringSplitOptions.RemoveEmptyEntries))
+            OutputRichTextBox.Text = String.Empty;
+            string outputResult = String.Empty;
+            foreach (var item in Utility.SplitString(InputRichTextBox.Text,"\n",StringSplitOptions.RemoveEmptyEntries))
             {
                 try
                 {

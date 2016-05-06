@@ -169,8 +169,8 @@ namespace Assessment
                 else
                     throw new ArgumentException("Input can not be parsed");
             } // does not handle two integer
-
-            int parsedGalecticalResult = parser.CalculateRomanNumeralSet(sumOfGalecticalRomanLetters.Split(new string[] { " " }, StringSplitOptions.RemoveEmptyEntries));
+            
+            int parsedGalecticalResult = parser.CalculateRomanNumeralSet(Utility.SplitString(sumOfGalecticalRomanLetters, " ", StringSplitOptions.RemoveEmptyEntries));
             assignmentDictionary.Add(AssignmentInputs[variableIndex], numberAssigned / parsedGalecticalResult);
         }
 
