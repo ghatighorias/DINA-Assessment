@@ -20,6 +20,9 @@ namespace Assessment
         Regex mixedAssignmentRgx;
         Regex galecticalAssignmentRgx;
 
+        /// <summary>
+        /// This Class provides functionality to parse the inputs of the operator
+        /// </summary>
         public InputHandler()
         {
             galecticHandler = new GalecticRomanAssignmentValueHandler();
@@ -34,6 +37,11 @@ namespace Assessment
             galecticalAssignmentRgx = new Regex(galecticalAssignmentPatterm, RegexOptions.IgnoreCase);
         }
 
+        /// <summary>
+        /// Parsing the input got from the operator based on it being a question, galectical assignment, or a mixed assignment
+        /// </summary>
+        /// <param name="InputLine">A string contain the input that can be a question, galectical assignment, or a mixed assignment</param>
+        /// <param name="outputResult">A string containing the value of what was inquired in the question or an empty in case of galectical or mized assignment</param>
         public void ParseInput(String InputLine, out string outputResult)
         {
             outputResult = "";
@@ -70,6 +78,11 @@ namespace Assessment
             }
         }
 
+        /// <summary>
+        /// Provide an answer for the question in case the variables are being assigned previously
+        /// </summary>
+        /// <param name="input">A string containing the question</param>
+        /// <returns>A string containing the value of what was inquired in the question</returns>
         private string ProvideAnswer(String input)
         {
             ParsingPhase currentPhase = ParsingPhase.GALECTICALTERM;
@@ -129,16 +142,32 @@ namespace Assessment
 
             return calculatedResult.ToString();
         }
-
-        public bool IsQuestion(String input)
+    
+        /// <summary>
+        /// check if the input given is in the correct format of being considered as a question
+        /// </summary>
+        /// <param name="input">a string contains the question</param>
+        /// <returns>boolean indicating whether the input is a question or not</returns>
+        private bool IsQuestion(String input)
         {
             return questionRgx.IsMatch(input);
         }
-        public bool IsMixedAssignment(String input)
+        /// <summary>
+        /// check if the input given is in the correct format of being considered as a mixed assignment of galectical term, Material and a number
+        /// </summary>
+        /// <param name="input">a string contains the mixed assignment</param>
+        /// <returns>boolean indicating whether the input is a mixed assignment or not</returns>
+        private bool IsMixedAssignment(String input)
         {
             return mixedAssignmentRgx.IsMatch(input);
         }
-        public bool IsGalecticalAssignment(String input)
+
+        /// <summary>
+        /// check if the input given is in the correct format of being considered as a Assignment between Roman numbers and Galectical terms
+        /// </summary>
+        /// <param name="input">a string contains a galectival assignment</param>
+        /// <returns>boolean indicating whether the input is a galectical assignment or not</returns>
+        private bool IsGalecticalAssignment(String input)
         {
             return galecticalAssignmentRgx.IsMatch(input);
         }

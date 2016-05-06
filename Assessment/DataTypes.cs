@@ -7,7 +7,9 @@ using System.Threading.Tasks;
 namespace Assessment
 {
 
-
+    /// <summary>
+    /// This Enumerator keeps the Roman Numeral number and their value
+    /// </summary>
     public enum RomanNumerals
     {
         INVALID = 0,
@@ -20,14 +22,9 @@ namespace Assessment
         M = 1000
     }
 
-    public enum InputType
-    {
-        INVALID,
-        ASSIGNMENT,
-        CONVERSION,
-        QUESTION
-    }
-
+    /// <summary>
+    /// This Enumerator is for keeping the track of state of parsing a sentence
+    /// </summary>    
     public enum ParsingPhase
     {
         NONE,
@@ -35,4 +32,12 @@ namespace Assessment
         VARIABLES,
         INTEGERS,
     }
+
+    /*public enum InputType
+    {
+        INVALID,
+        ASSIGNMENT,
+        CONVERSION,
+        QUESTION
+    }*/
 }

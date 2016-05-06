@@ -5,10 +5,21 @@ namespace Assessment
 {
     public class RomanNumeralParser
     {
+        /// <summary>
+        /// Keeps the track of assigned Roman Numeral letters and their equivalent mathematical values
+        /// </summary>
         private List<RomanNumerals> parsedRomanNumerals;
 
+        /// <summary>
+        /// This class Provides functionality to handle the conversion of Roman numeral numbers to mathematical numbers
+        /// </summary>
         public RomanNumeralParser() { }
 
+        /// <summary>
+        /// Calculating the digital value of a Roman numeral series
+        /// </summary>
+        /// <param name="RomanNumeralLetters">A series of Roman Numeral Number to be clculated</param>
+        /// <returns>An Integer indicating the mathematical equivalent of the Roman numeral series</returns>
         public int CalculateRomanNumeralSet(params string[] RomanNumeralLetters)
         {
             int sum = 0;
@@ -47,6 +58,10 @@ namespace Assessment
             return sum;
         }
 
+        /// <summary>
+        /// Parsing the given series of Roman numeral number
+        /// </summary>
+        /// <param name="RomanNumeralLetters">A series of Roman Numeral Number</param>
         private void ParseRomanNumeralSet(params string[] RomanNumeralLetters)
         {
             RomanNumerals parsedItem;
@@ -61,6 +76,11 @@ namespace Assessment
             }
         }
 
+        /// <summary>
+        /// Try to parse a series of Roman Numeral letter
+        /// </summary>
+        /// <param name="RomanNumeralLetters">A series of Roman Numeral Number</param>
+        /// <returns>A boolean indicating whether the series is capable of being parsed or not</returns>
         public bool TryParse(params string[] RomanNumeralLetters)
         {
             RomanNumerals parsedItem;
@@ -74,11 +94,23 @@ namespace Assessment
             return true;
         }
 
+        /// <summary>
+        /// Add the digital value of two Roman numeral number
+        /// </summary>
+        /// <param name="first">Roman numeral number 1</param>
+        /// <param name="second">Roman numeral number 2</param>
+        /// <returns>the result of the add operation</returns>
         private int AddNumerals(RomanNumerals first, RomanNumerals second)
         {
             return (int)first + (int)second;
         }
 
+        /// <summary>
+        /// Subtract the digital value of two Roman numeral number
+        /// </summary>
+        /// <param name="first">Roman numeral number 1 which is the base number</param>
+        /// <param name="second">Roman numeral number 2 to be subtracted from the first</param>
+        /// <returns>the result of the subtract operation</returns>
         private int SubtractNumerals(RomanNumerals first, RomanNumerals second)
         {
             return (int)first - (int)second;

@@ -6,13 +6,23 @@ using System.Threading.Tasks;
 
 namespace Assessment
 {
+    /// <summary>
+    /// An Abstract class for the Mixed and Galectical to be derived from
+    /// </summary>
     public abstract class AssignmentValueHandler
     {
-        public RomanNumeralParser parser;
+        protected RomanNumeralParser parser;
+        /// <summary>
+        /// The function make sure any derived class will be able to parse a specific assignment sentence
+        /// </summary>
+        /// <param name="AssignmentInputs"></param>
         public abstract void ParsedAssignment(params string[] AssignmentInputs);
         
     }
 
+    /// <summary>
+    /// Takes care of handling the galectical assignments
+    /// </summary>
     public class GalecticRomanAssignmentValueHandler : AssignmentValueHandler
     {
         private Dictionary<string, RomanNumerals> assignmentDictionary;
@@ -21,6 +31,10 @@ namespace Assessment
             assignmentDictionary = new Dictionary<string, RomanNumerals>();
         }
 
+        /// <summary>
+        /// Parse a galectical assignment consist of a galectical term and a roman numeral value
+        /// </summary>
+        /// <param name="AssignmentInputs">An array of string indicating the tokens in the assignment</param>
         public override void ParsedAssignment(params string[] AssignmentInputs)
         {
             RomanNumeralParser parser = new RomanNumeralParser();
@@ -33,6 +47,11 @@ namespace Assessment
             assignmentDictionary.Add(AssignmentInputs[0], parsingResult);
         }
 
+        /// <summary>
+        /// Check the already assigment for a galectical term and retrived the Roman numeral equivalent
+        /// </summary>
+        /// <param name="GalecticTerm">the galectical term to be searched</param>
+        /// <returns>the equivalent oman numeral letter</returns>
         public RomanNumerals QueryAssignedValue(string GalecticTerm)
         {
             if (assignmentDictionary.ContainsKey(GalecticTerm))
@@ -42,24 +61,35 @@ namespace Assessment
         }
     }
 
-
+    /// <summary>
+    /// Takes care of handling the mixed assignments
+    /// </summary>
     public class MixedAssignmentHandler : AssignmentValueHandler
     {
         protected Dictionary<string, float> assignmentDictionary;
         GalecticRomanAssignmentValueHandler galecticRomanAssignmentValueHandler;
-        public MixedAssignmentHandler(GalecticRomanAssignmentValueHandler GalecticRomanAssignmentValueHandlerInstance)
+        public MixedAssignmentHandler(GalecticRomanAssignmentValueHandler GalecticRomanAssignmentValuveHandlerInstance)
         {
             assignmentDictionary = new Dictionary<string, float>();
-            galecticRomanAssignmentValueHandler = GalecticRomanAssignmentValueHandlerInstance;
+            galecticRomanAssignmentValueHandler = GalecticRomanAssignmentValuveHandlerInstance;
             parser = new RomanNumeralParser();
         }
 
-
+        /// <summary>
+        /// Check if the Material requested is previously assigned or not
+        /// </summary>
+        /// <param name="Materials">The material to request</param>
+        /// <returns>A boolean indicating whether the Material is previously assigned or not</returns>
         public bool Contains(string Materials)
         {
             return assignmentDictionary.ContainsKey(Materials);
-        } 
+        }
 
+        /// <summary>
+        /// Retriving the mathematical value of a Material for a previously parsed material
+        /// </summary>
+        /// <param name="Materials">The material to get the value for</param>
+        /// <returns>a float indicating the parsed value for the requested Material</returns>
         public float QueryAssignedValue(string Materials)
         {
             try
@@ -122,7 +152,10 @@ namespace Assessment
             return true;
         }
 
-
+        /// <summary>
+        /// Parse a mixed assignment and keep the assigned athematical value to the material in a dictionary
+        /// </summary>
+        /// <param name="AssignmentInputs">An array of string containing the tokens of the assignment</param>
         public override void ParsedAssignment(params string[] AssignmentInputs)
         {
             RomanNumerals queriedItem;
