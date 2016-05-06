@@ -34,7 +34,7 @@ namespace UnitTestProject
         public void TestMethod1()
         {
             float retrievedValue;
-            mixedHandler.QueryAssignedValue("Silver", out retrievedValue);
+            retrievedValue = mixedHandler.QueryAssignedValue("Silver");
             Assert.AreEqual(retrievedValue, 17);
         }
 
@@ -42,29 +42,26 @@ namespace UnitTestProject
         public void TestMethod2()
         {
             float retrievedValue;
-            mixedHandler.QueryAssignedValue("Gold", out retrievedValue);
+            retrievedValue = mixedHandler.QueryAssignedValue("Gold");
             Assert.AreEqual(retrievedValue, 14450);
         }
 
         [TestMethod]
         public void TestMethod3()
         {
-            float retrievedValue;
-            Assert.AreEqual(false, mixedHandler.QueryAssignedValue("", out retrievedValue));
+            Assert.AreEqual(false, mixedHandler.Contains(""));
         }
 
         [TestMethod]
         public void TestMethod4()
         {
-            float retrievedValue;
-            Assert.AreEqual(false, mixedHandler.QueryAssignedValue("Bronze", out retrievedValue));
+            Assert.AreEqual(false, mixedHandler.Contains("Bronze"));
         }
 
         [TestMethod]
         public void TestMethod5()
         {
-            float retrievedValue;
-            Assert.AreEqual(false, mixedHandler.QueryAssignedValue("silver", out retrievedValue));
+            Assert.AreEqual(false, mixedHandler.Contains("silver"));
         }
     }
 }

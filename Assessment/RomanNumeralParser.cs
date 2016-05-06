@@ -6,55 +6,48 @@ namespace Assessment
     public class RomanNumeralParser
     {
         private List<RomanNumerals> parsedRomanNumerals;
-        private int calculatedValue;
-        public int CalculatedValue
-        {
-            get { return calculatedValue; }
-            set { calculatedValue = value; }
-        }
 
         public RomanNumeralParser() { }
-        public RomanNumeralParser(params string[] RomanNumeralLetters)
-        {
-            CalculateRomanNumeralSet(RomanNumeralLetters);
-        }
 
         public int CalculateRomanNumeralSet(params string[] RomanNumeralLetters)
         {
             int sum = 0;
-            if (!ParseRomanNumeralSet(RomanNumeralLetters))
-                return -1;
 
-            int firstIndex = 0;
-            int secondIndex = 1;
-
-            while (firstIndex < RomanNumeralLetters.Length)
+            try
             {
-                if (secondIndex == RomanNumeralLetters.Length) // handling the last letter in the queue
-                    sum += AddNumerals(parsedRomanNumerals[firstIndex], RomanNumerals.INVALID);
-                else
+                ParseRomanNumeralSet(RomanNumeralLetters);
+                int firstIndex = 0;
+                int secondIndex = 1;
+
+                while (firstIndex < RomanNumeralLetters.Length)
                 {
-                    if (parsedRomanNumerals[firstIndex] >= parsedRomanNumerals[secondIndex])
+                    if (secondIndex == RomanNumeralLetters.Length) // handling the last letter in the queue
                         sum += AddNumerals(parsedRomanNumerals[firstIndex], RomanNumerals.INVALID);
                     else
                     {
-                        sum += SubtractNumerals(parsedRomanNumerals[secondIndex], parsedRomanNumerals[firstIndex]);
-                        firstIndex++;
-                        secondIndex++;
+                        if (parsedRomanNumerals[firstIndex] >= parsedRomanNumerals[secondIndex])
+                            sum += AddNumerals(parsedRomanNumerals[firstIndex], RomanNumerals.INVALID);
+                        else
+                        {
+                            sum += SubtractNumerals(parsedRomanNumerals[secondIndex], parsedRomanNumerals[firstIndex]);
+                            firstIndex++;
+                            secondIndex++;
+                        }
+
                     }
-                        
+
+                    firstIndex++;
+                    secondIndex++;
                 }
-
-                firstIndex++;
-                secondIndex++;
             }
-
-            calculatedValue = sum;
+            catch(ArgumentException e)
+            {
+                throw e;
+            }
             return sum;
         }
 
-
-        private bool ParseRomanNumeralSet(params string[] RomanNumeralLetters)
+        private void ParseRomanNumeralSet(params string[] RomanNumeralLetters)
         {
             RomanNumerals parsedItem;
             parsedRomanNumerals = new List<RomanNumerals>();
@@ -64,10 +57,8 @@ namespace Assessment
                 if (Enum.TryParse<RomanNumerals>(item, out parsedItem))
                     parsedRomanNumerals.Add(parsedItem);
                 else
-                    return false;
+                    throw new ArgumentException("The input is not a valid Roman Numeral series");
             }
-
-            return true;
         }
 
         public bool TryParse(params string[] RomanNumeralLetters)

@@ -9,7 +9,7 @@ namespace Assessment
     public abstract class AssignmentValueHandler
     {
         public RomanNumeralParser parser;
-        public abstract bool ParsedAssignment(params string[] AssignmentInputs);
+        public abstract void ParsedAssignment(params string[] AssignmentInputs);
         
     }
 
@@ -21,17 +21,16 @@ namespace Assessment
             assignmentDictionary = new Dictionary<string, RomanNumerals>();
         }
 
-        public override bool ParsedAssignment(params string[] AssignmentInputs)
+        public override void ParsedAssignment(params string[] AssignmentInputs)
         {
             RomanNumeralParser parser = new RomanNumeralParser();
             RomanNumerals parsingResult = RomanNumerals.INVALID;
 
-            if (2 != AssignmentInputs.Length && 0 == AssignmentInputs.Length && !Enum.TryParse<RomanNumerals>(AssignmentInputs[1],out parsingResult))
-                return false;
+            if (2 != AssignmentInputs.Length && 0 == AssignmentInputs.Length && !Enum.TryParse<RomanNumerals>(AssignmentInputs[1], out parsingResult))
+                throw new ArgumentException("Input can not be parsed");
 
             parsingResult = (RomanNumerals)Enum.Parse(typeof(RomanNumerals), AssignmentInputs[1]);
             assignmentDictionary.Add(AssignmentInputs[0], parsingResult);
-            return true;
         }
 
         public RomanNumerals QueryAssignedValue(string GalecticTerm)
@@ -55,15 +54,22 @@ namespace Assessment
             parser = new RomanNumeralParser();
         }
 
-        public bool QueryAssignedValue(string Materials, out float retrivedValue)
+
+        public bool Contains(string Materials)
         {
-            retrivedValue = 0;
-            if (assignmentDictionary.ContainsKey(Materials))
+            return assignmentDictionary.ContainsKey(Materials);
+        } 
+
+        public float QueryAssignedValue(string Materials)
+        {
+            try
             {
-                retrivedValue = assignmentDictionary[Materials];
-                return true;
+                return assignmentDictionary[Materials];
             }
-            return false;
+            catch(Exception e)
+            {
+                throw e;
+            }
         }
 
         public bool TryParsed(params string[] AssignmentInputs)
@@ -117,7 +123,7 @@ namespace Assessment
         }
 
 
-        public override bool ParsedAssignment(params string[] AssignmentInputs)
+        public override void ParsedAssignment(params string[] AssignmentInputs)
         {
             RomanNumerals queriedItem;
             Int32 parsedInteger;
@@ -161,18 +167,12 @@ namespace Assessment
                 }
 
                 else
-                    return false;
+                    throw new ArgumentException("Input can not be parsed");
             } // does not handle two integer
 
             int parsedGalecticalResult = parser.CalculateRomanNumeralSet(sumOfGalecticalRomanLetters.Split(new string[] { " " }, StringSplitOptions.RemoveEmptyEntries));
             assignmentDictionary.Add(AssignmentInputs[variableIndex], numberAssigned / parsedGalecticalResult);
-
-            return true;
         }
 
-        
-
-    }
-
-    
+    }   
 }
