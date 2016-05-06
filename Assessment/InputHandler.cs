@@ -7,6 +7,9 @@ using System.Threading.Tasks;
 
 namespace Assessment
 {
+    /// <summary>
+    /// This Class provides functionality to parse the inputs of the operator
+    /// </summary>
     public class InputHandler
     {
         GalecticRomanAssignmentValueHandler galecticHandler;
@@ -20,9 +23,6 @@ namespace Assessment
         Regex mixedAssignmentRgx;
         Regex galecticalAssignmentRgx;
 
-        /// <summary>
-        /// This Class provides functionality to parse the inputs of the operator
-        /// </summary>
         public InputHandler()
         {
             galecticHandler = new GalecticRomanAssignmentValueHandler();
@@ -86,7 +86,7 @@ namespace Assessment
         private string ProvideAnswer(String input)
         {
             ParsingPhase currentPhase = ParsingPhase.GALECTICALTERM;
-            ParsingPhase previousphase = ParsingPhase.NONE;
+            ParsingPhase previousphase = ParsingPhase.GALECTICALTERM;
             int variableCounter = 0;
             RomanNumerals queriedGalecticalTermValue;
             float queriedMixedTermValue = 1;
@@ -103,6 +103,8 @@ namespace Assessment
                     queryResult = mixedHandler.Contains(item);
                     if (queryResult)
                         queriedMixedTermValue = mixedHandler.QueryAssignedValue(item);
+                    else
+                        currentPhase = ParsingPhase.NONE;
 
                     if (RomanNumerals.INVALID != queriedGalecticalTermValue)
                         currentPhase = ParsingPhase.GALECTICALTERM;
@@ -152,6 +154,7 @@ namespace Assessment
         {
             return questionRgx.IsMatch(input);
         }
+        
         /// <summary>
         /// check if the input given is in the correct format of being considered as a mixed assignment of galectical term, Material and a number
         /// </summary>

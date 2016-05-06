@@ -64,5 +64,11 @@ namespace UnitTestProject
         {
             inputHandler.ParseInput("how much is pish tegj glob glob", out output);
         }
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentException))]
+        public void TestMethod7()
+        {
+            inputHandler.ParseInput("how much is test test glob glob", out output);
+        }
     }
 }

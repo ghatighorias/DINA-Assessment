@@ -39,14 +39,14 @@
             | System.Windows.Forms.AnchorStyles.Left)));
             this.InputRichTextBox.Location = new System.Drawing.Point(13, 13);
             this.InputRichTextBox.Name = "InputRichTextBox";
-            this.InputRichTextBox.Size = new System.Drawing.Size(455, 397);
+            this.InputRichTextBox.Size = new System.Drawing.Size(455, 464);
             this.InputRichTextBox.TabIndex = 0;
             this.InputRichTextBox.Text = "";
             // 
             // button1
             // 
             this.button1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.button1.Location = new System.Drawing.Point(0, 416);
+            this.button1.Location = new System.Drawing.Point(0, 483);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(943, 23);
             this.button1.TabIndex = 1;
@@ -61,7 +61,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.OutputRichTextBox.Location = new System.Drawing.Point(474, 12);
             this.OutputRichTextBox.Name = "OutputRichTextBox";
-            this.OutputRichTextBox.Size = new System.Drawing.Size(455, 398);
+            this.OutputRichTextBox.Size = new System.Drawing.Size(455, 465);
             this.OutputRichTextBox.TabIndex = 2;
             this.OutputRichTextBox.Text = "";
             // 
@@ -69,7 +69,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(943, 439);
+            this.ClientSize = new System.Drawing.Size(943, 506);
             this.Controls.Add(this.OutputRichTextBox);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.InputRichTextBox);

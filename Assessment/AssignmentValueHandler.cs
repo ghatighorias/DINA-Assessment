@@ -102,56 +102,6 @@ namespace Assessment
             }
         }
 
-        public bool TryParsed(params string[] AssignmentInputs)
-        {
-            RomanNumerals queriedItem;
-            Int32 parsedInteger;
-            bool integerParsingResult;
-            int variableCounter = 0;
-            int variableIndex = 0;
-            string sumOfGalecticalRomanLetters = "";
-            int numberAssigned = 0;
-            ParsingPhase previousParsingPhase = ParsingPhase.NONE;
-            ParsingPhase currentParsingPhase = ParsingPhase.GALECTICALTERM;
-
-            for (int index = 0; index < AssignmentInputs.Length; index++)
-            {
-                queriedItem = galecticRomanAssignmentValueHandler.QueryAssignedValue(AssignmentInputs[index]);
-
-                integerParsingResult = Int32.TryParse(AssignmentInputs[index], out parsedInteger);
-
-                if (RomanNumerals.INVALID != queriedItem)
-                    currentParsingPhase = ParsingPhase.GALECTICALTERM;
-                else if (integerParsingResult)
-                    currentParsingPhase = ParsingPhase.INTEGERS;
-                else
-                {
-                    currentParsingPhase = ParsingPhase.VARIABLES;
-                    variableIndex = index;
-                    variableCounter++;
-                }
-
-                if ((int)currentParsingPhase >= (int)previousParsingPhase && variableCounter <= 1)
-                {
-                    switch (currentParsingPhase)
-                    {
-                        case ParsingPhase.GALECTICALTERM:
-                            sumOfGalecticalRomanLetters += queriedItem.ToString();
-                            break;
-                        case ParsingPhase.INTEGERS:
-                            numberAssigned = parsedInteger;
-                            break;
-                    }
-                    previousParsingPhase = currentParsingPhase;
-                }
-
-                else
-                    return false;
-            } // does not handle two integer
-
-            return true;
-        }
-
         /// <summary>
         /// Parse a mixed assignment and keep the assigned athematical value to the material in a dictionary
         /// </summary>

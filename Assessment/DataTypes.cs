@@ -32,12 +32,4 @@ namespace Assessment
         VARIABLES,
         INTEGERS,
     }
-
-    /*public enum InputType
-    {
-        INVALID,
-        ASSIGNMENT,
-        CONVERSION,
-        QUESTION
-    }*/
 }

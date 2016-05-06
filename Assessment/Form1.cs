@@ -18,7 +18,7 @@ namespace Assessment
         }
 
         private void button1_Click(object sender, EventArgs e)
-        {
+        {   
             InputHandler inputHandler = new InputHandler();
             OutputRichTextBox.Text = String.Empty;
             string outputResult = String.Empty;
@@ -28,9 +28,7 @@ namespace Assessment
                 {
                     inputHandler.ParseInput(item, out outputResult);
                     if (String.Empty != outputResult)
-                    {
                         OutputRichTextBox.Text += outputResult + Environment.NewLine;
-                    }
                 }
                 catch
                 {

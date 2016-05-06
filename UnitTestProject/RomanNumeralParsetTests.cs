@@ -13,7 +13,6 @@ namespace UnitTestProject
             RomanNumeralParser parser = new RomanNumeralParser();
             if (parser.TryParse("I", "I"))
             {
-
                 Assert.AreEqual(parser.CalculateRomanNumeralSet("I", "I"), 2);
             }
             else
