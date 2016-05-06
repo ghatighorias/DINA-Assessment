@@ -20,11 +20,23 @@ namespace Assessment
         private void button1_Click(object sender, EventArgs e)
         {
             InputHandler inputHandler = new InputHandler();
-            foreach (var item in richTextBox1.Text.Split(new string[] { "\n" }, StringSplitOptions.RemoveEmptyEntries))
+            string outputResult = "";
+            foreach (var item in InputRichTextBox.Text.Split(new string[] { "\n" }, StringSplitOptions.RemoveEmptyEntries))
             {
-                richTextBox2.Text = inputHandler.ParseInput(item);
+                try
+                {
+                    inputHandler.ParseInput(item, out outputResult);
+                    if (String.Empty != outputResult)
+                    {
+                        OutputRichTextBox.Text += outputResult + Environment.NewLine;
+                    }
+                }
+                catch
+                {
+                    OutputRichTextBox.Text += "I have no idea what you are talking about" + Environment.NewLine;
+                }                
             }
-            
+
             
         }
     }

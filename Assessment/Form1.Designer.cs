@@ -28,45 +28,51 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
+            this.InputRichTextBox = new System.Windows.Forms.RichTextBox();
             this.button1 = new System.Windows.Forms.Button();
-            this.richTextBox2 = new System.Windows.Forms.RichTextBox();
+            this.OutputRichTextBox = new System.Windows.Forms.RichTextBox();
             this.SuspendLayout();
             // 
-            // richTextBox1
+            // InputRichTextBox
             // 
-            this.richTextBox1.Location = new System.Drawing.Point(13, 13);
-            this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(455, 259);
-            this.richTextBox1.TabIndex = 0;
-            this.richTextBox1.Text = "";
+            this.InputRichTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
+            this.InputRichTextBox.Location = new System.Drawing.Point(13, 13);
+            this.InputRichTextBox.Name = "InputRichTextBox";
+            this.InputRichTextBox.Size = new System.Drawing.Size(455, 397);
+            this.InputRichTextBox.TabIndex = 0;
+            this.InputRichTextBox.Text = "";
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(13, 404);
+            this.button1.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.button1.Location = new System.Drawing.Point(0, 416);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.Size = new System.Drawing.Size(943, 23);
             this.button1.TabIndex = 1;
-            this.button1.Text = "button1";
+            this.button1.Text = "Parse The questions";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
-            // richTextBox2
+            // OutputRichTextBox
             // 
-            this.richTextBox2.Location = new System.Drawing.Point(474, 12);
-            this.richTextBox2.Name = "richTextBox2";
-            this.richTextBox2.Size = new System.Drawing.Size(455, 259);
-            this.richTextBox2.TabIndex = 2;
-            this.richTextBox2.Text = "";
+            this.OutputRichTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.OutputRichTextBox.Location = new System.Drawing.Point(474, 12);
+            this.OutputRichTextBox.Name = "OutputRichTextBox";
+            this.OutputRichTextBox.Size = new System.Drawing.Size(455, 398);
+            this.OutputRichTextBox.TabIndex = 2;
+            this.OutputRichTextBox.Text = "";
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(943, 439);
-            this.Controls.Add(this.richTextBox2);
+            this.Controls.Add(this.OutputRichTextBox);
             this.Controls.Add(this.button1);
-            this.Controls.Add(this.richTextBox1);
+            this.Controls.Add(this.InputRichTextBox);
             this.Name = "Form1";
             this.Text = "Form1";
             this.ResumeLayout(false);
@@ -75,9 +81,9 @@
 
         #endregion
 
-        private System.Windows.Forms.RichTextBox richTextBox1;
+        private System.Windows.Forms.RichTextBox InputRichTextBox;
         private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.RichTextBox richTextBox2;
+        private System.Windows.Forms.RichTextBox OutputRichTextBox;
     }
 }
 

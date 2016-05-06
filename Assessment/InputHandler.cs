@@ -34,9 +34,9 @@ namespace Assessment
             galecticalAssignmentRgx = new Regex(galecticalAssignmentPatterm, RegexOptions.IgnoreCase);
         }
 
-        public string ParseInput(String InputLine)
+        public void ParseInput(String InputLine, out string outputResult)
         {
-            string result="";
+            outputResult = "";
             GroupCollection inputGroups;
             try
             {
@@ -45,21 +45,21 @@ namespace Assessment
                     inputGroups = galecticalAssignmentRgx.Matches(InputLine)[0].Groups;
                     galecticHandler.ParsedAssignment(inputGroups[1].Value, inputGroups[2].Value);
                 }
-                else if (IsQuestion(InputLine))
-                {
-                    inputGroups = galecticalAssignmentRgx.Matches(InputLine)[0].Groups;
-                    result = ProvideAnswer(inputGroups[2].Value);
-                }
                 else if (IsMixedAssignment(InputLine))
                 {
                     inputGroups = mixedAssignmentRgx.Matches(InputLine)[0].Groups;
-                    string[] RomanAndVariablesInsentence = mixedAssignmentRgx.Match(InputLine).Groups[1].Value.Replace("is", "").Split(new string[] { " " }, StringSplitOptions.RemoveEmptyEntries);
+                    string[] RomanAndVariablesInsentence = mixedAssignmentRgx.Match(InputLine).Groups[1].Value.Replace(" is", "").Split(new string[] { " " }, StringSplitOptions.RemoveEmptyEntries);
                     string digitValueOfaterial = mixedAssignmentRgx.Match(InputLine).Groups[3].Value;
                     List<string> elementsToProcess = new List<string>();
                     elementsToProcess.AddRange(RomanAndVariablesInsentence);
                     elementsToProcess.Add(digitValueOfaterial);
 
                     mixedHandler.ParsedAssignment(elementsToProcess.ToArray());
+                }
+                else if (IsQuestion(InputLine))
+                {
+                    inputGroups = questionRgx.Matches(InputLine)[0].Groups;
+                    outputResult = ProvideAnswer(inputGroups[2].Value);
                 }
                 else
                     throw new ArgumentException();
@@ -68,8 +68,6 @@ namespace Assessment
             {
                 throw e;
             }
-
-            return result;
         }
 
         private string ProvideAnswer(String input)
