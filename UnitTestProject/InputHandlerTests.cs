@@ -4,7 +4,6 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace UnitTestProject
 {
-    //Making regex functions for checking the sentences private and fixing the tests accordingly
     [TestClass]
     public class InputHandlerTests
     {
