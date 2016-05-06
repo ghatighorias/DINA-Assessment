@@ -52,6 +52,7 @@ namespace Assessment
         {
             assignmentDictionary = new Dictionary<string, float>();
             galecticRomanAssignmentValueHandler = GalecticRomanAssignmentValueHandlerInstance;
+            parser = new RomanNumeralParser();
         }
 
         public bool QueryAssignedValue(string Materials, out float retrivedValue)
@@ -145,7 +146,7 @@ namespace Assessment
                     variableCounter++;
                 }
 
-                if ((int)currentParsingPhase >= (int)previousParsingPhase && variableCounter == 1)
+                if ((int)currentParsingPhase >= (int)previousParsingPhase && variableCounter <= 1)
                 {
                     switch (currentParsingPhase)
                     {

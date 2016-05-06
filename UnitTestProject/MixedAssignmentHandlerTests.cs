@@ -13,8 +13,8 @@ namespace UnitTestProject
         MixedAssignmentHandler mixedHandler;
 
 
-        [TestInitialize]
-        private void setUpInitialInput()
+        [TestInitialize()]
+        public void setUpInitialInput()
         {
             grAssignment = new GalecticRomanAssignmentValueHandler();
             mixedHandler = new MixedAssignmentHandler(grAssignment);
@@ -24,8 +24,8 @@ namespace UnitTestProject
             grAssignment.ParsedAssignment("pish", "X");
             grAssignment.ParsedAssignment("tegj", "L");
             mixedHandler.ParsedAssignment("glob", "glob", "Silver", "34");
-            mixedHandler.ParsedAssignment("glob", "prok", "Gold  ", "57800");
-            mixedHandler.ParsedAssignment("pish", "pish", "Iron  ", "3910");
+            mixedHandler.ParsedAssignment("glob", "prok", "Gold", "57800");
+            mixedHandler.ParsedAssignment("pish", "pish", "Iron", "3910");
         }
         
 
@@ -50,24 +50,21 @@ namespace UnitTestProject
         public void TestMethod3()
         {
             float retrievedValue;
-            mixedHandler.QueryAssignedValue("", out retrievedValue);
-            Assert.AreEqual(retrievedValue, -1);
+            Assert.AreEqual(false, mixedHandler.QueryAssignedValue("", out retrievedValue));
         }
 
         [TestMethod]
         public void TestMethod4()
         {
             float retrievedValue;
-            mixedHandler.QueryAssignedValue("Bronze", out retrievedValue);
-            Assert.AreEqual(retrievedValue, -1);
+            Assert.AreEqual(false, mixedHandler.QueryAssignedValue("Bronze", out retrievedValue));
         }
 
         [TestMethod]
         public void TestMethod5()
         {
             float retrievedValue;
-            mixedHandler.QueryAssignedValue("silver", out retrievedValue);
-            Assert.AreEqual(retrievedValue, 17);
+            Assert.AreEqual(false, mixedHandler.QueryAssignedValue("silver", out retrievedValue));
         }
     }
 }
