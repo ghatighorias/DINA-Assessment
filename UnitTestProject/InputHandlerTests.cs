@@ -19,16 +19,16 @@ namespace UnitTestProject
         [TestMethod]
         public void TestMethod1()
         {
-            Assert.AreEqual(inputHandler.IsGalecticalAssignment(""), false);
-            Assert.AreEqual(inputHandler.IsMixedAssignment(""), false);
-            Assert.AreEqual(inputHandler.IsQuestion(""),false);
+            Assert.AreEqual(inputHandler.IsGalecticalAssignment("how much wood could a woodchuck chuck if a woodchuck could chuck wood ?"), false);
+            Assert.AreEqual(inputHandler.IsMixedAssignment("how much wood could a woodchuck chuck if a woodchuck could chuck wood ?"), false);
+            Assert.AreEqual(inputHandler.IsQuestion("how much wood could a woodchuck chuck if a woodchuck could chuck wood ?"), false);
         }
         [TestMethod]
         public void TestMethod2()
         {
-            Assert.AreEqual(inputHandler.IsGalecticalAssignment("how much wood could a woodchuck chuck if a woodchuck could chuck wood ?"), false);
-            Assert.AreEqual(inputHandler.IsMixedAssignment("how much wood could a woodchuck chuck if a woodchuck could chuck wood ?"), false);
-            Assert.AreEqual(inputHandler.IsQuestion("how much wood could a woodchuck chuck if a woodchuck could chuck wood ?"), false);
+            Assert.AreEqual(inputHandler.IsGalecticalAssignment(""), false);
+            Assert.AreEqual(inputHandler.IsMixedAssignment(""), false);
+            Assert.AreEqual(inputHandler.IsQuestion(""), false);
         }
         [TestMethod]
         public void TestMethod3()

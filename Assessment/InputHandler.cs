@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace Assessment
@@ -11,10 +12,26 @@ namespace Assessment
         GalecticRomanAssignmentValueHandler galecticHandler;
         MixedAssignmentHandler mixedHandler;
 
+        string questionPattern;
+        string mixedAssignmentPattern;
+        string galecticalAssignmentPatterm;
+
+        Regex questionRgx;
+        Regex mixedAssignmentRgx;
+        Regex galecticalAssignmentRgx;
+
         public InputHandler()
         {
             galecticHandler = new GalecticRomanAssignmentValueHandler();
             mixedHandler = new MixedAssignmentHandler(galecticHandler);
+
+            questionPattern = "^(how much|how many Credits) is [a-zA-Z\\s]+ \\?$";
+            galecticalAssignmentPatterm = "^\\w+ is (I|V|X|L|C|D|M)$";
+            mixedAssignmentPattern = "^([a-zA-z]+\\s)+is \\d+ Credits$";
+
+            questionRgx = new Regex(questionPattern, RegexOptions.IgnoreCase);
+            mixedAssignmentRgx = new Regex(mixedAssignmentPattern, RegexOptions.IgnoreCase);
+            galecticalAssignmentRgx = new Regex(galecticalAssignmentPatterm, RegexOptions.IgnoreCase);
         }
 
         public string ParseInput(String InputLine)
@@ -75,21 +92,17 @@ namespace Assessment
 
         public bool IsQuestion(String input)
         {
-            return input.StartsWith("how many Credits is", StringComparison.CurrentCultureIgnoreCase);
+            return questionRgx.IsMatch(input);
         }
         public bool IsMixedAssignment(String input)
         {
-            string[] fixedstring = input.Replace(" Credits", "").Replace(" is", "").Split(new string[] { " " }, StringSplitOptions.RemoveEmptyEntries);
-            return mixedHandler.TryParsed(fixedstring);//fixedstring.Split(new string[] { " " }, StringSplitOptions.RemoveEmptyEntries));
+            return mixedAssignmentRgx.IsMatch(input);
         }
         public bool IsGalecticalAssignment(String input)
         {
-            RomanNumeralParser parser = new RomanNumeralParser();
-            string[] elements = input.Split(new string[] { " is " }, StringSplitOptions.RemoveEmptyEntries);
-            if (!parser.TryParse(elements[0]) && parser.TryParse(elements[1]))
-                return true;
-
-            return false;
+            return galecticalAssignmentRgx.IsMatch(input);
         }
+
+
     }
 }
