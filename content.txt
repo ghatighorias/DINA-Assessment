@@ -4,3 +4,57 @@ total 16
 4 AssessmentTests
 0 content.txt
 4 UnitTestProject
+.:
+total 20
+drwxrwxr-x 3 dina dina 4096 jún   27 12:36 Assessment
+-rw-rw-r-- 1 dina dina 1468 jún   27 12:36 Assessment.sln
+drwxrwxr-x 3 dina dina 4096 jún   27 12:36 AssessmentTests
+-rw-rw-r-- 1 dina dina   89 jún   27 12:50 content.txt
+drwxrwxr-x 3 dina dina 4096 jún   27 12:36 UnitTestProject
+
+./Assessment:
+total 64
+-rw-rw-r-- 1 dina dina  184 jún   27 12:36 App.config
+-rw-rw-r-- 1 dina dina 4047 jún   27 12:36 Assessment.csproj
+-rw-rw-r-- 1 dina dina 6766 jún   27 12:36 AssignmentValueHandler.cs
+-rw-rw-r-- 1 dina dina  668 jún   27 12:36 DataTypes.cs
+-rw-rw-r-- 1 dina dina 1231 jún   27 12:36 Form1.cs
+-rw-rw-r-- 1 dina dina 3713 jún   27 12:36 Form1.Designer.cs
+-rw-rw-r-- 1 dina dina 5698 jún   27 12:36 Form1.resx
+-rw-rw-r-- 1 dina dina 7837 jún   27 12:36 InputHandler.cs
+-rw-rw-r-- 1 dina dina  511 jún   27 12:36 Program.cs
+drwxrwxr-x 2 dina dina 4096 jún   27 12:36 Properties
+-rw-rw-r-- 1 dina dina 4531 jún   27 12:36 RomanNumeralParser.cs
+-rw-rw-r-- 1 dina dina  948 jún   27 12:36 Utility.cs
+
+./Assessment/Properties:
+total 24
+-rw-rw-r-- 1 dina dina 1414 jún   27 12:36 AssemblyInfo.cs
+-rw-rw-r-- 1 dina dina 2779 jún   27 12:36 Resources.Designer.cs
+-rw-rw-r-- 1 dina dina 5496 jún   27 12:36 Resources.resx
+-rw-rw-r-- 1 dina dina 1067 jún   27 12:36 Settings.Designer.cs
+-rw-rw-r-- 1 dina dina  242 jún   27 12:36 Settings.settings
+
+./AssessmentTests:
+total 16
+-rw-rw-r-- 1 dina dina 4529 jún   27 12:36 AssessmentTests.csproj
+-rw-rw-r-- 1 dina dina  392 jún   27 12:36 InputHandlerTests.cs
+drwxrwxr-x 2 dina dina 4096 jún   27 12:36 Properties
+
+./AssessmentTests/Properties:
+total 4
+-rw-rw-r-- 1 dina dina 1424 jún   27 12:36 AssemblyInfo.cs
+
+./UnitTestProject:
+total 32
+-rw-rw-r-- 1 dina dina 1751 jún   27 12:36 GalecticRomanAssignmentValueHandlerTests.cs
+-rw-rw-r-- 1 dina dina 2695 jún   27 12:36 InputHandlerTests.cs
+-rw-rw-r-- 1 dina dina 1877 jún   27 12:36 MixedAssignmentHandlerTests.cs
+drwxrwxr-x 2 dina dina 4096 jún   27 12:36 Properties
+-rw-rw-r-- 1 dina dina 2450 jún   27 12:36 RomanNumeralParsetTests.cs
+-rw-rw-r-- 1 dina dina 4774 jún   27 12:36 UnitTestProject.csproj
+-rw-rw-r-- 1 dina dina  624 jún   27 12:36 UtilityTests.cs
+
+./UnitTestProject/Properties:
+total 4
+-rw-rw-r-- 1 dina dina 1424 jún   27 12:36 AssemblyInfo.cs
